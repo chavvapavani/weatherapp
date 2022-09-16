@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
     <div class="grid-container">
         <div class="logo" class="grid-item">
@@ -11,20 +13,16 @@
         <div class="grid-item" class="name">
             <h2>WeatherLens</h2>
         </div>
-        
-
     </div>
-    
-    <div class="main" >
+    <div class="main">
         <div class="grid-container1">
-        
-        <div class="grid-item1">
-        <input type="search" [(ngModel)]="city" name="city" placeholder="Enter the city" value="bengaluru">
-        </div>
-        <div class="grid-item2" > 
-        <button (click)="toggleDisplay()" type="submit"><img src="..\assets\find (1).svg" height="20px" width="20px" > </button>
-        </div>
-    
+            <div class="grid-item1">
+                <input type="search" [(ngModel)]="city" name="city" placeholder="Enter the city">
+            </div>
+            <div class="grid-item2">
+                <button (click)="toggleDisplay()" type="submit"><img src="..\assets\find (1).svg" height="20px"
+                        width="20px"> </button>
+            </div>
         </div>
     </div>
     <div [hidden]="isDisplay" class="container">
@@ -32,48 +30,46 @@
             <img src="..\assets\cold.jpg" *ngIf="14>15">
             <img src="..\assets\hot.jpg" *ngIf="14<=15">
             <div class="weather-data">
-                <div class="city">{{displaycity}}</div>
-                <div class="icon"><img src="..\assets\icon.png"></div>
-                <div class="temperature">30°C</div>
-                
+                <div class="city">{{weatherdata.city}}</div>
+                <div class="icon"><img src={{link}}></div>
+                <div class="temperature">{{weatherdata.temperature}}°C</div>
+
             </div>
         </div>
         <div class="lower-data">
-           <div class="more-data">
-            <div class="info-block">
-                <div class="info-block-label">
-                    <img src="..\assets\humidity.svg" height="75px" width="75px">
-                    <span>Humidity</span>
+            <div class="more-data">
+                <div class="info-block">
+                    <div class="info-block-label">
+                        <img src="..\assets\humidity.svg" height="75px" width="75px">
+                        <span>Humidity</span>
+                    </div>
+                    <div class="info-block-value">{{weatherdata.humidity}}</div>
                 </div>
-                <div class="info-block-value">10%</div>
-            </div>
-            <div class="info-block">
-                <div class="info-block-label">
-                    <img src="..\assets\pressure-meter.svg" height="75px" width="75px">
-                    <span>Pressure</span>
+                <div class="info-block">
+                    <div class="info-block-label">
+                        <img src="..\assets\pressure-meter.svg" height="75px" width="75px">
+                        <span>Pressure</span>
+                    </div>
+                    <div class="info-block-value">{{weatherdata.pressure}}</div>
                 </div>
-                <div class="info-block-value">10</div>
-            </div>
-            <div class="info-block">
-                <div class="info-block-label">
-                    <img src="..\assets\low-temperature.svg" height="75px" width="75px">
-                    <span>Min</span>
+                <div class="info-block">
+                    <div class="info-block-label">
+                        <img src="..\assets\low-temperature.svg" height="75px" width="75px">
+                        <span>Min</span>
+                    </div>
+                    <div class="info-block-value">{{weatherdata.minimum_temp}}°C</div>
                 </div>
-                <div class="info-block-value">10°C</div>
-            </div>
-            <div class="info-block">
-                <div class="info-block-label">
-                    <img src="..\assets\high-temperature.svg" height="75px" width="75px">
-                    <span>Max</span>
+                <div class="info-block">
+                    <div class="info-block-label">
+                        <img src="..\assets\high-temperature.svg" height="75px" width="75px">
+                        <span>Max</span>
+                    </div>
+                    <div class="info-block-value">{{weatherdata.maximum_temp}}°C</div>
                 </div>
-                <div class="info-block-value">100°C</div>
             </div>
-           </div>
-                    
-                
-            
         </div>
-         
     </div>
+
 </body>
+
 </html>

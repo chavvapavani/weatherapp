@@ -22,6 +22,10 @@ class WeatherApi(APIView):
             "city": json_data['name'],
             "humidity":json_data['main']['humidity'],
             "pressure":json_data['main']['pressure'],
+            "minimum_temp":json_data['main']['temp_min'],
+            "maximum_temp":json_data['main']['temp_max'],
+            "icon":json_data['weather'][0]['icon'],
+
         }
         return Response(response_data)
 class WeatherForecast(APIView):
