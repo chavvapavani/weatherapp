@@ -1,75 +1,84 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
 <body>
-    <div class="grid-container">
-        <div class="logo" class="grid-item">
-            <img src="..\assets\logo.png" height="100px" width="100px">
+    <div class="banner">
+        <div class="banner-block">
+            <img src="..\assets\logo1.png" height="100vh" width="100vw">
         </div>
-        <div class="grid-item" class="name">
+        <div class="banner-block" class="name">
             <h2>WeatherLens</h2>
         </div>
-    </div>
-    <div class="main">
-        <div class="grid-container1">
-            <div class="grid-item1">
-                <input type="search" [(ngModel)]="city" name="city" placeholder="Enter the city">
-            </div>
-            <div class="grid-item2">
-                <button (click)="toggleDisplay()" type="submit"><img src="..\assets\find (1).svg" height="20px"
-                        width="20px"> </button>
-            </div>
-        </div>
-    </div>
-    <div [hidden]="isDisplay" class="container">
-        <div class="upper-data">
-            <img src="..\assets\cold.jpg" *ngIf="14>15">
-            <img src="..\assets\hot.jpg" *ngIf="14<=15">
-            <div class="weather-data">
-                <div class="city">{{weatherdata.city}}</div>
-                <div class="icon"><img src={{link}}></div>
-                <div class="temperature">{{weatherdata.temperature}}°C</div>
-
-            </div>
-        </div>
-        <div class="lower-data">
-            <div class="more-data">
-                <div class="info-block">
-                    <div class="info-block-label">
-                        <img src="..\assets\humidity.svg" height="75px" width="75px">
-                        <span>Humidity</span>
-                    </div>
-                    <div class="info-block-value">{{weatherdata.humidity}}</div>
+        <div class="search-bar">
+            <div class="search-bar-container">
+                <div class="search">
+                    <input type="search" [(ngModel)]="city" name="city" placeholder="Weather in your City">
                 </div>
-                <div class="info-block">
-                    <div class="info-block-label">
-                        <img src="..\assets\pressure-meter.svg" height="75px" width="75px">
-                        <span>Pressure</span>
-                    </div>
-                    <div class="info-block-value">{{weatherdata.pressure}}</div>
-                </div>
-                <div class="info-block">
-                    <div class="info-block-label">
-                        <img src="..\assets\low-temperature.svg" height="75px" width="75px">
-                        <span>Min</span>
-                    </div>
-                    <div class="info-block-value">{{weatherdata.minimum_temp}}°C</div>
-                </div>
-                <div class="info-block">
-                    <div class="info-block-label">
-                        <img src="..\assets\high-temperature.svg" height="75px" width="75px">
-                        <span>Max</span>
-                    </div>
-                    <div class="info-block-value">{{weatherdata.maximum_temp}}°C</div>
+                <div class="search-icon">
+                    <button (click)="toggleDisplay()" type="submit"><img src="..\assets\find (1).svg" height="16vh"
+                            width="13vw"> </button>
                 </div>
             </div>
         </div>
+        <div class="date">{{date}}</div>
     </div>
-
+    <div class="weather-data-container">
+        <div [hidden]="isDisplay" class="current-weather-data" class="current-weather">
+            <div class="upper-data">
+                <img src="..\assets\cold.jpg" *ngIf="weatherdata.temperature<20">
+                <img src="..\assets\hot.jpg" *ngIf="weatherdata.temperature>=20">
+                <div class="weather-data">
+                    <div class="temperature">{{weatherdata.temperature}}°C</div>
+                    <div class="icon"><img src="http://openweathermap.org/img/w/{{weatherdata.icon}}.png"></div>
+                    <div class="city">{{weatherdata.city}}</div>
+                </div>
+            </div>
+            <div class="lower-data">
+                <div class="more-data">
+                    <div class="info-block">
+                        <div class="info-block-label">
+                            <img src="..\assets\humidity.svg" height="75px" width="75px">
+                            <span>Humidity</span>
+                        </div>
+                        <div class="info-block-value">{{weatherdata.humidity}}%</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-block-label">
+                            <img src="..\assets\pressure-meter.svg" height="75px" width="75px">
+                            <span>Pressure</span>
+                        </div>
+                        <div class="info-block-value">{{weatherdata.pressure}} hPa</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-block-label">
+                            <img src="..\assets\low-temperature.svg" height="75px" width="75px">
+                            <span>Min</span>
+                        </div>
+                        <div class="info-block-value">{{weatherdata.minimum_temp}}°C</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-block-label">
+                            <img src="..\assets\high-temperature.svg" height="75px" width="75px">
+                            <span>Max</span>
+                        </div>
+                        <div class="info-block-value">{{weatherdata.maximum_temp}}°C</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div [hidden]="isDisplay" class="forecast-data-fields" class="forecast-data">
+            <button (click)="sort()"><img src="..\assets\sort.svg" height="20px" width="30px"></button>
+            <div *ngFor="let f of forecastdata">
+                <div class="forecast">
+                    <div class="forecast-date">{{f.date}}</div>
+                    <div class="forecast-temperature">{{f.temperature}}°C</div>
+                    <div class="forecast-image"><img src="http://openweathermap.org/img/w/{{f.icon}}.png"></div>
+                    <div class="forecast-description">{{f.description}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-
 </html>

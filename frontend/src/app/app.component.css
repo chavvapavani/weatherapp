@@ -11,102 +11,90 @@ body {
   position: fixed;
   width: 100vw;
 
-
-
 }
-
-.main {
-  width: 350px;
+.banner {
+  display: grid;
+  grid-template-columns: 10vw 20vw 50vw 20vw;
+  padding: 10px;
+}
+.banner-block {
+  padding: 20px;
+  font-size: 30px;
+}
+.name {
+  margin-top: 60px;
+  margin-left: 32px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: rgb(241, 243, 245);
+  border-color: blue;
+  text-shadow: 1px 1px 2px white;
+  font-size: 1.6vw;
+}
+.search-bar{
+  width: 28vw;
+  height:4vh;
   border: 3px solid rgb(64, 97, 190);
   padding: 9px;
   border-radius: 30px;
-  margin-top: -30px;
-  margin-left: 430px;
   background-color: rgb(241, 241, 247);
-  height: 20px;
-
-
-
-
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 40px;
 }
-
-.main button {
-  margin-left: 293px;
-  margin-top: -100px;
-}
-
-input {
-  background: transparent;
-  border: 0px;
-  outline: 0px;
-  width: 330px;
-  font-size: medium;
-  text-align: center;
-  font-family: 'Courier New', Courier, monospace;
-
-}
-
-.time {
-  margin: 0px;
-  padding: 0px;
-}
-
-.grid-container {
+.search-bar-container{
   display: grid;
-  grid-template-columns: 100px 400px;
-  padding: 10px;
-}
-
-.grid-item {
-  padding: 20px;
-  font-size: 30px;
-
-
-}
-
-.grid-container1 {
-  display: grid;
-  grid-template-columns: 10px 10px;
+  grid-template-columns: 24vw 3vw;
   padding: -50px;
   width: 50px;
   height: 10px;
 }
-
-.grid-item1 {
+.search {
   padding: 20px;
   font-size: 30px;
-  margin-top: -35px;
+  margin-top: -4.5vh;
 }
-
-.grid-item2 {
+input {
+  background: transparent;
+  border: 0px;
+  outline: 0px;
+  width: 25.5vw;
+  font-size: 2.8vh;
+  font-family: 'Courier New', Courier, monospace;
+  height:25px;
+  margin-top: -1vh;
+}
+.search-icon{
   padding: 20px;
   font-size: 30px;
   margin-top: -28px;
   margin-left: 3px;
   background: transparent;
 }
-
-.name {
+.date{
   margin-top: 60px;
-  margin-left: 32px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  color: rgb(10, 11, 12);
-  border-color: blue;
+  font-size: 1.8vw;
+  color: azure;
+  font-family:Georgia, 'Times New Roman', Times, serif
 }
-
-.container {
-  width: 300px;
-  height: 65vh;
+.weather-data-container{
+  display: grid;
+  grid-template-columns: 40vw 60vw;
+  margin-top: 3vh;
+  margin-bottom: 20vh;
+}
+.current-weather-data {
   background-color: rgb(37, 46, 98);
   border-radius: 20px;
   box-shadow: 10px 10px 10px var(--shadow-dark);
-  margin-left: 300px;
-  margin-top: 20px;
-
+  margin-left: 150px;
+  margin-top: 70px;
+  background: transparent;
+ 
 }
-
-
-
+.current-weather{
+  margin-left: 9vw;
+  margin-right: 3vw;
+}
 .upper-data {
   position: relative;
   overflow: hidden;
@@ -115,7 +103,6 @@ input {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
-
 .upper-data img {
   position: absolute;
   top: 0;
@@ -123,7 +110,6 @@ input {
   width: 100%;
   height: 100%;
 }
-
 .weather-data {
   position: relative;
   z-index: 1;
@@ -135,24 +121,20 @@ input {
   align-items: center;
   justify-content: center;
 }
-
-.city {
-  color: black;
+.temperature {
+  color: rgb(220, 231, 234);
   text-align: center;
-  margin-top: -60px;
-  font-size: 0.9cm;
-
-
+  margin-top: 10px;
+  font-size: 1cm;
+  font-weight: 900;
 }
 
-.temperature {
-  color: black;
+.city {
+  color: rgb(236, 230, 230);
   font-size: 1cm;
   text-align: center;
   font-weight: 900;
   margin-bottom: -20px;
-
-
 }
 
 .icon {
@@ -161,9 +143,7 @@ input {
   position: relative;
   z-index: 1;
   margin-top: 20px;
-
 }
-
 .more-data {
   flex: 1;
   background-color: rgb(37, 46, 98);
@@ -173,11 +153,7 @@ input {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
-
-
 }
-
 .info-block {
   width: 50%;
   display: flex;
@@ -190,9 +166,7 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
-
 .info-block-label img {
   height: 30px;
   width: 30px
@@ -201,9 +175,7 @@ input {
 .info-block-label span {
   color: white;
   font-size: 0.8em;
-
 }
-
 .info-block-value {
   width: 50%;
   display: flex;
@@ -211,5 +183,65 @@ input {
   align-content: center;
   color: white;
   margin-top: 35px;
-
 }
+.forecast-data{
+  margin-left: 10vw;
+  margin-right: 5vw;
+  background-color: rgb(37, 46, 98);
+  border-radius: 20px;
+  box-shadow: 10px 10px 10px var(--shadow-dark);
+  margin-bottom: 2vh;
+}
+.forecast-data-fields button{
+  opacity: 0.7; 
+}
+.forecast{
+  display: grid;
+  grid-template-columns: 10vw 10vw 10vw 20vw;
+  color: white;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.forecast-date{
+  text-align: center;
+  align-items: center;
+  left:0%;
+  margin-left:15px;
+  margin-right:15px;
+}
+
+.forecast-temperature{
+  text-align: center;
+  align-items: center;
+  left:0%;
+  margin-left:15px;
+  margin-right:15px;  
+}
+.forecast-image{ 
+  left:0%;
+  margin-left:15px;
+  margin-right:15px;
+}
+.forecast-description{
+  text-align: left;
+  left:0%;
+  margin-left:15px;
+  margin-right:15px;  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

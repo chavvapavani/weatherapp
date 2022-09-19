@@ -7,24 +7,41 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'frontend';
+  date=new Date().toDateString()
+ 
+  
   displaycity: String = "";
   city: String = "";
   isDisplay = true;
+  temp:any;
   toggleDisplay() {
     if (this.city != "") {
-      this.isDisplay = false;
       this.displaycity = this.city;
       this.http.post("http://127.0.0.1:8000/", { 'city': this.city }).subscribe(data => {
-        this.weatherdata = data;
-        console.log("pavani", data, this.weatherdata);
+        this.temp=data;
+        if(this.temp.cod=="404"){
+        this.isDisplay=true;
+        alert("Enter valid city name")
+        }
+        else if(this.temp.cod=="405"){
+          this.isDisplay=true;
+         alert("City name should not contain numbers")
+        }
+        else{
+          this.isDisplay = false;
+          this.weatherdata = data;
+        }   
       }
       )
+      this.http.post("http://127.0.0.1:8000/forecast/", { 'city' : this.city }).subscribe(data => {
+        this.forecastdata = data;
+        this.forecastdata.splice(this.forecastdata.length-1,this.forecastdata.length-1)
+      })
     }
     else {
       this.isDisplay = true;
+      alert("City name should not be empty")
     }
-
-
   }
   constructor(private http: HttpClient) { }
 
@@ -38,12 +55,13 @@ export class AppComponent {
     "maximum_temp": 0,
     "icon": ""
   }
-  link = "http://openweathermap.org/img/wn/10d@2x.png";
-
+  forecastdata:any;
   send_data = {
     "city": this.city
   }
-
+sort(){
+  this.forecastdata.reverse()
+}
   ngOnInit(): void {
 
   }
