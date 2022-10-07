@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <div class="banner">
+    <div class="banner">    <!--upper block(logo,name,search-bar,date)-->
         <div class="banner-block">
             <img src="..\assets\logo1.png" height="100vh" width="100vw">
         </div>
@@ -24,15 +24,15 @@
         </div>
         <div class="date">{{date}}</div>
     </div>
-    <div class="weather-data-container">
+    <div class="weather-data-container">    <!--lower-block(weatherdata and forecastdata)-->
         <div [hidden]="isDisplay" class="current-weather-data" class="current-weather">
             <div class="upper-data">
-                <img src="..\assets\cold.jpg" *ngIf="weatherdata.temperature<20">
-                <img src="..\assets\hot.jpg" *ngIf="weatherdata.temperature>=20">
+                <img src="..\assets\cold.jpg" *ngIf="weatherdata.temperature<20">  <!--if the temperature is less than 20,this image is displayed-->
+                <img src="..\assets\hot.jpg" *ngIf="weatherdata.temperature>=20">  <!--if the temperature is greater than 20,this image is displayed-->
                 <div class="weather-data">
-                    <div class="temperature">{{weatherdata.temperature}}°C</div>
-                    <div class="icon"><img src="http://openweathermap.org/img/w/{{weatherdata.icon}}.png"></div>
-                    <div class="city">{{weatherdata.city}}</div>
+                    <div class="temperature">{{weatherdata.weather_details.temperature}}°C</div>
+                    <div class="icon"><img src="http://openweathermap.org/img/w/{{weatherdata.weather_details.icon}}.png"></div>
+                    <div class="city">{{weatherdata.weather_details.city}}</div>
                 </div>
             </div>
             <div class="lower-data">
@@ -42,28 +42,28 @@
                             <img src="..\assets\humidity.svg" height="75px" width="75px">
                             <span>Humidity</span>
                         </div>
-                        <div class="info-block-value">{{weatherdata.humidity}}%</div>
+                        <div class="info-block-value">{{weatherdata.weather_details.humidity}}%</div>
                     </div>
                     <div class="info-block">
                         <div class="info-block-label">
                             <img src="..\assets\pressure-meter.svg" height="75px" width="75px">
                             <span>Pressure</span>
                         </div>
-                        <div class="info-block-value">{{weatherdata.pressure}} hPa</div>
+                        <div class="info-block-value">{{weatherdata.weather_details.pressure}} hPa</div>
                     </div>
                     <div class="info-block">
                         <div class="info-block-label">
                             <img src="..\assets\low-temperature.svg" height="75px" width="75px">
                             <span>Min</span>
                         </div>
-                        <div class="info-block-value">{{weatherdata.minimum_temp}}°C</div>
+                        <div class="info-block-value">{{weatherdata.weather_details.minimum_temp}}°C</div>
                     </div>
                     <div class="info-block">
                         <div class="info-block-label">
                             <img src="..\assets\high-temperature.svg" height="75px" width="75px">
                             <span>Max</span>
                         </div>
-                        <div class="info-block-value">{{weatherdata.maximum_temp}}°C</div>
+                        <div class="info-block-value">{{weatherdata.weather_details.maximum_temp}}°C</div>
                     </div>
                 </div>
             </div>

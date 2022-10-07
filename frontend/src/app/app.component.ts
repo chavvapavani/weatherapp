@@ -7,23 +7,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'frontend';
-  date=new Date().toDateString()
+  date=new Date().toDateString(); //to display date in day-month-date-year format
  
   
-  displaycity: String = "";
+  displaycity:String = "";  
   city: String = "";
   isDisplay = true;
-  temp:any;
+  temp:any;  //variabale to check the cod 
   toggleDisplay() {
     if (this.city != "") {
       this.displaycity = this.city;
       this.http.post("http://127.0.0.1:8000/", { 'city': this.city }).subscribe(data => {
-        this.temp=data;
-        if(this.temp.cod=="404"){
+        this.temp=data
+        if(this.temp.cod=="404"){    //checking whether the given city is valid or not
         this.isDisplay=true;
         alert("Enter valid city name")
         }
-        else if(this.temp.cod=="405"){
+        else if(this.temp.cod=="405"){  //checking whether the city name is numbers
           this.isDisplay=true;
          alert("City name should not contain numbers")
         }
@@ -35,11 +35,12 @@ export class AppComponent {
       )
       this.http.post("http://127.0.0.1:8000/forecast/", { 'city' : this.city }).subscribe(data => {
         this.forecastdata = data;
+        // The data contains a cod for api status, so reducing the length by one
         this.forecastdata.splice(this.forecastdata.length-1,this.forecastdata.length-1)
       })
     }
     else {
-      this.isDisplay = true;
+      
       alert("City name should not be empty")
     }
   }
@@ -56,13 +57,13 @@ export class AppComponent {
     "icon": ""
   }
   forecastdata:any;
-  send_data = {
-    "city": this.city
-  }
+  
 sort(){
-  this.forecastdata.reverse()
+  this.forecastdata.reverse()  //to reverse the dates in the forcast data
 }
+
   ngOnInit(): void {
 
   }
+
 }
