@@ -1,3 +1,5 @@
+from asyncio.windows_events import NULL
+import sys
 from rest_framework.response import Response
 import requests
 from rest_framework.views import APIView
@@ -14,39 +16,44 @@ class WeatherApi(APIView):
     def post(self,request):
 
         # try:
-        serializer=self.input_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        #     import ipdb
+        #     ipdb.set_trace()
 
-        city=serializer.validated_data.get("city")
-        weather_url=f"http://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&APPID={self.app_id}"
-        data=requests.get(weather_url).json()
+            serializer=self.input_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
 
-        if(city.isnumeric()):
-            return Response({"cod":"405"})
+            city=serializer.validated_data.get("city")
+            if(city.isnumeric()):
+                return Response({"cod":"405"})
 
-        data = {
-            "weather_condition": data["weather"][0]["description"],
-            "temperature": data["main"]["temp"],
-            "city": data["name"],
-            "humidity":data["main"]["humidity"],
-            "pressure":data["main"]["pressure"],
-            "minimum_temp":data["main"]["temp_min"],
-            "maximum_temp":data["main"]["temp_max"],
-            "icon":data["weather"][0]["icon"],
-            "cod":"200",
-        }
-        #weathervar = Weather.objects.create(**data['data'])
-        db_weather = Weather.objects.filter(city=city, cod="200")
-        if len(db_weather) < 0:
-            Weather(**data)
+            weather_url=f"http://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&APPID={self.app_id}"
+            api_data=requests.get(weather_url).json()
+            if api_data['cod'] == '404':
+                return Response({'error':api_data['message']})
 
-        obj=WeatherLens(data)
-        data_serializer=self.output_serializer(obj)
+            data = {
+                "weather_condition": api_data["weather"][0]["description"],
+                "temperature": api_data["main"]["temp"],
+                "city": api_data["name"],
+                "humidity":api_data["main"]["humidity"],
+                "pressure":api_data["main"]["pressure"],
+                "minimum_temp":api_data["main"]["temp_min"],
+                "maximum_temp":api_data["main"]["temp_max"],
+                "icon":api_data["weather"][0]["icon"],
+                "cod":"200",
+            }
+            
+            db_weather = Weather.objects.filter(city= data['city'])
+            #db_weather.update(weather_condition = data['weather_condition'] )
+            if len(db_weather) < 1:
+                Weather(**data)
+            obj=WeatherLens(data)
+            data_serializer=self.output_serializer(obj)
+            return Response(data_serializer.data)
         
-        return Response(data_serializer.data)
-        
-    # except:
-    #     return Response({"cod":"404"})
+        # except:
+            
+        #     return Response({"cod":"404"})
 
 
 class WeatherForecast(APIView): #forecastApi
